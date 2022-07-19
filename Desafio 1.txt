@@ -1,0 +1,17 @@
+Desafio 1
+   acessar outro servico imdb - endpoint trocar most populars
+
+
+Desafio 2
+    Melhorar systemout: pegar nota arredondar, for mostrar estrelas.
+
+Desafio 3
+    Extrair chave, esconder. Externalizar codigo
+
+Desafio 4
+    Usar outra biblioteca de parser
+
+Desafio 5
+  Outro metodo para voce votar dar estrelas. Classe scan
+
+
