@@ -10,6 +10,9 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         // Fazer uma conexão HTTP e buscar os top 250 filmes
+        // Top250
+        //String url = "https://raw.githubusercontent.com/alexfelipe/imersao-java/json/top250.json";
+        // Most Populars
         String url = "https://raw.githubusercontent.com/alexfelipe/imersao-java/json/top250.json";
         URI endereco = URI.create(url);
         HttpClient client = HttpClient.newHttpClient();
