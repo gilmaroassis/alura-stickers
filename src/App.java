@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class App {
+    private static Map<String, String> map;
+
     public static void main(String[] args) throws Exception {
         
         // Fazer uma conexão HTTP e buscar os top 250 filmes
@@ -27,28 +29,36 @@ public class App {
 
         // Extrair só os dados que interessam (titulo, poster, classificação)
         JsonParser parser = new JsonParser();
-        List<Map<String, String>> listaDeFilmes = parser.parse(body);
+        List<Map<String, String>> listaDeConteudos = parser.parse(body);
 
         // System.out.println(listaDeFilmes.size());
         // System.out.println(listaDeFilmes.get(0));
 
         // Exibir e manipular os dados.
+        var geradora = new GeradoradeFigurinhas();
 
-        for (Map<String,String> filme : listaDeFilmes) {
-            String urlImagem = filme.get("image");
+        //for (Map<String,String> filme : listaDeFilmes) {
+        for(int i =0; i< 3; i++){
+            Map<String,String> filme = listaDeConteudos.get(i);
+            String urlImagem = filme.get("image")
+             .replaceAll("(@+)(.*).jpg$", "$1.jpg");
             String titulo = filme.get("title");
-
-            InputStream inputStream=  new URL(urlImagem).openStream();
+            
             String nomeArquivo = titulo + ".png";
-
-            var geradora = new GeradoradeFigurinhas();
-            geradora.cria(inputStream, nomeArquivo);
-
+           
+            
+            try{
+                InputStream inputStream = new URL(urlImagem).openStream();
+                System.out.println("Gerando imagem - [" + titulo + "]");
+                geradora.cria(inputStream, nomeArquivo);
+             }catch(java.io.FileNotFoundException err){
+                  System.out.println("Imagem não encontrada ou link inválido");
+             }
 
             System.out.println(titulo);
             System.out.println();
       
-            
         }
+        //}
     }
 }
